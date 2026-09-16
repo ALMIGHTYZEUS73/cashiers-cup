@@ -1,0 +1,3212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cashiers Cup</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --black: #050407;
+  --black2: #0b080e;
+
+  --purple-dark: #12091b;
+  --purple: #21102f;
+  --purple-light: #35164b;
+
+  --gold: #d7ad4b;
+  --gold-light: #f2cf73;
+  --gold-dark: #a67c27;
+
+  --white: #f8f6fa;
+  --muted: #9b929f;
+
+  --line: rgba(255,255,255,.08);
+  --gold-line: rgba(215,173,75,.30);
+}
+
+/* ===============================
+   PAGE
+================================ */
+
+html {
+  background: var(--black);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(94,39,133,.28),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      #12091a 0%,
+      #09060d 45%,
+      #050407 100%
+    );
+
+  color: var(--white);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+.app {
+  width: 100%;
+  max-width: 520px;
+
+  min-height: 100vh;
+
+  margin: 0 auto;
+
+  padding-bottom: 95px;
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+header {
+  position: relative;
+
+  overflow: hidden;
+
+  text-align: center;
+
+  padding:
+    38px 20px 28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(54,22,76,.65),
+      rgba(12,7,16,.15)
+    );
+
+  border-bottom:
+    1px solid rgba(215,173,75,.15);
+}
+
+header::before {
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+  height: 180px;
+
+  left: 50%;
+  top: -140px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    rgba(215,173,75,.18);
+
+  border-radius: 50%;
+
+  filter: blur(50px);
+}
+
+.logo {
+  position: relative;
+
+  z-index: 2;
+
+  width: 60px;
+  height: 60px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #321745,
+      #100815
+    );
+
+  border:
+    1px solid rgba(215,173,75,.45);
+
+  box-shadow:
+    0 0 30px rgba(215,173,75,.10);
+
+  font-size: 31px;
+}
+
+
+header .season-title {
+  position: relative;
+  z-index: 2;
+  margin: 13px 0 2px;
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+}
+
+header h1 {
+  position: relative;
+
+  z-index: 2;
+
+  margin:
+    3px 0 4px;
+
+  color:
+    var(--gold-light);
+
+  font-size: 30px;
+
+  font-weight: 900;
+
+  letter-spacing: 4px;
+
+  text-shadow:
+    0 2px 15px rgba(215,173,75,.12);
+}
+
+header p {
+  position: relative;
+
+  z-index: 2;
+
+  margin: 0;
+
+  color: #9c929f;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 2.5px;
+}
+
+/* ===============================
+   MAIN
+================================ */
+
+main {
+  padding:
+    24px 17px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.section-title {
+  margin:
+    0 0 12px;
+
+  color: #aaa0ae;
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+}
+
+/* ===============================
+   HOME STANDINGS
+================================ */
+
+.standings {
+  display: grid;
+
+  gap: 10px;
+
+  margin-bottom: 29px;
+}
+
+.player-card {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  min-height: 64px;
+
+  padding:
+    0 18px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #21102e,
+      #0c0810
+    );
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.22);
+}
+
+.player-card.first {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(92,60,22,.35),
+      #1d1028
+    );
+
+  border-color:
+    rgba(215,173,75,.42);
+}
+
+.player-card.first::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: 13px;
+
+  bottom: 13px;
+
+  width: 3px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--gold-light),
+      var(--gold-dark)
+    );
+
+  border-radius:
+    0 4px 4px 0;
+}
+
+.player-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+}
+
+.position {
+  font-size: 22px;
+}
+
+.player-name {
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 900;
+}
+
+.player-points {
+  color:
+    var(--gold-light);
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  letter-spacing: .3px;
+}
+
+/* ===============================
+   MVP CARD
+================================ */
+
+.mvp-card {
+  position: relative;
+
+  overflow: hidden;
+
+  margin-bottom: 30px;
+
+  padding:
+    28px 20px;
+
+  text-align: center;
+
+  border-radius: 18px;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(215,173,75,.14),
+      transparent 50%
+    ),
+    linear-gradient(
+      145deg,
+      #321642,
+      #100914
+    );
+
+  border:
+    1px solid rgba(215,173,75,.35);
+
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.32);
+}
+
+.mvp-card::before {
+  content: "★";
+
+  position: absolute;
+
+  right: -18px;
+
+  bottom: -54px;
+
+  color:
+    rgba(215,173,75,.055);
+
+  font-size: 150px;
+
+  transform:
+    rotate(-12deg);
+}
+
+.mvp-label {
+  position: relative;
+
+  z-index: 2;
+
+  color:
+    var(--gold);
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 2.7px;
+}
+
+.mvp-name {
+  position: relative;
+
+  z-index: 2;
+
+  margin:
+    9px 0 5px;
+
+  color: white;
+
+  font-size: 29px;
+
+  font-weight: 900;
+}
+
+.mvp-average {
+  position: relative;
+
+  z-index: 2;
+
+  color:
+    var(--muted);
+
+  font-size: 13px;
+}
+
+.mvp-average strong {
+  color:
+    var(--gold-light);
+
+  font-size: 15px;
+}
+
+.mvp-rounds {
+  position: relative;
+
+  z-index: 2;
+
+  margin-top: 8px;
+
+  color: #766e7b;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.3px;
+}
+
+/* ===============================
+   EVENT CARD
+================================ */
+
+.event-card {
+  position: relative;
+
+  overflow: hidden;
+
+  padding:
+    27px 20px 24px;
+
+  text-align: center;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #281337,
+      #0b070e
+    );
+
+  border:
+    1px solid rgba(215,173,75,.18);
+
+  box-shadow:
+    0 14px 40px rgba(0,0,0,.32);
+}
+
+.event-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 190px;
+  height: 190px;
+
+  top: -125px;
+  right: -85px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(117,48,160,.18);
+
+  filter:
+    blur(20px);
+}
+
+.event-round {
+  position: relative;
+
+  z-index: 2;
+
+  color:
+    var(--gold);
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 2.2px;
+}
+
+.event-name {
+  position: relative;
+
+  z-index: 2;
+
+  margin:
+    13px 0 5px;
+
+  color: white;
+
+  font-size: 29px;
+
+  font-weight: 900;
+}
+
+.event-layout {
+  position: relative;
+
+  z-index: 2;
+
+  color:
+    var(--muted);
+
+  font-size: 13px;
+}
+
+/* ===============================
+   TIER BADGES
+================================ */
+
+.tier {
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-block;
+
+  margin:
+    17px 0;
+
+  padding:
+    7px 17px;
+
+  border-radius: 30px;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 1.4px;
+}
+
+/* A TIER */
+
+.tier-A {
+  color:
+    var(--gold-light);
+
+  background:
+    rgba(215,173,75,.09);
+
+  border:
+    1px solid rgba(215,173,75,.45);
+}
+
+/* B TIER */
+
+.tier-B {
+  color:
+    #d8a7f2;
+
+  background:
+    rgba(130,58,171,.12);
+
+  border:
+    1px solid rgba(182,101,225,.35);
+}
+
+/* C TIER */
+
+.tier-C {
+  color:
+    #c7c3ca;
+
+  background:
+    rgba(200,195,203,.06);
+
+  border:
+    1px solid rgba(200,195,203,.23);
+}
+
+/* ===============================
+   POINTS
+================================ */
+
+.event-points {
+  position: relative;
+
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  padding-top: 19px;
+
+  border-top:
+    1px solid rgba(255,255,255,.07);
+}
+
+.event-points div:not(:last-child) {
+  border-right:
+    1px solid rgba(255,255,255,.07);
+}
+
+.event-points span {
+  display: block;
+
+  color: #837a88;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.event-points strong {
+  display: block;
+
+  margin:
+    5px 0 2px;
+
+  color:
+    var(--gold-light);
+
+  font-size: 29px;
+
+  font-weight: 900;
+}
+
+/* ===============================
+   FULL STANDINGS
+================================ */
+
+.stats-card {
+  margin-bottom: 10px;
+
+  padding: 18px;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #21102e,
+      #0c0810
+    );
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  box-shadow:
+    0 7px 22px rgba(0,0,0,.18);
+}
+
+.stats-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  margin-bottom: 16px;
+}
+
+.stats-name {
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: 900;
+}
+
+.stats-points {
+  color:
+    var(--gold-light);
+
+  font-weight: 900;
+}
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  text-align: center;
+}
+
+.stats-grid > div:not(:last-child) {
+  border-right:
+    1px solid rgba(255,255,255,.06);
+}
+
+.stat-value {
+  display: block;
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: 900;
+}
+
+.stat-label {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #7c7381;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: .6px;
+
+  text-transform: uppercase;
+}
+
+/* ===============================
+   SCHEDULE
+================================ */
+
+.schedule-event {
+  margin-bottom: 10px;
+
+  padding:
+    15px 16px;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1d0f28,
+      #0b070e
+    );
+
+  border:
+    1px solid rgba(255,255,255,.07);
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.16);
+}
+
+.schedule-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+}
+
+.schedule-round {
+  color:
+    var(--gold);
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.schedule-course {
+  margin:
+    6px 0 3px;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 900;
+}
+
+.schedule-layout {
+  color:
+    var(--muted);
+
+  font-size: 11px;
+}
+
+.schedule-event.completed {
+  opacity: .52;
+}
+
+/* ===============================
+   SCORE ENTRY
+================================ */
+
+.form-card {
+  padding: 21px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #21102e,
+      #0b070e
+    );
+
+  border:
+    1px solid rgba(215,173,75,.15);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.25);
+}
+
+.form-card > strong {
+  color: white;
+}
+
+.form-card label {
+  display: block;
+
+  margin:
+    18px 0 7px;
+
+  color: #aaa0ae;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+input {
+  width: 100%;
+
+  padding: 14px;
+
+  color: white;
+
+  background:
+    rgba(3,2,4,.65);
+
+  border:
+    1px solid rgba(255,255,255,.09);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  font-size: 17px;
+
+  transition: .2s ease;
+}
+
+input::placeholder {
+  color: #5e5662;
+}
+
+input:focus {
+  border-color:
+    rgba(215,173,75,.65);
+
+  box-shadow:
+    0 0 0 3px rgba(215,173,75,.07);
+}
+
+/* ===============================
+   GOLD BUTTON
+================================ */
+
+.submit-btn {
+  width: 100%;
+
+  margin-top: 23px;
+
+  padding: 15px;
+
+  border:
+    1px solid rgba(255,224,145,.35);
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e0b64f,
+      #a77b25
+    );
+
+  color: #100b04;
+
+  font-size: 13px;
+
+  font-weight: 900;
+
+  letter-spacing: .8px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 9px 25px rgba(215,173,75,.15);
+
+  transition: .2s ease;
+}
+
+.submit-btn:hover {
+  transform:
+    translateY(-1px);
+
+  filter:
+    brightness(1.08);
+}
+
+.submit-btn:active {
+  transform:
+    translateY(1px);
+}
+
+.notice {
+  margin-top: 15px;
+
+  color:
+    var(--gold-light);
+
+  text-align: center;
+
+  font-size: 12px;
+}
+
+/* ===============================
+   RESET BUTTON
+================================ */
+
+.reset-btn {
+  width: 100%;
+
+  margin-top: 13px;
+
+  padding: 12px;
+
+  border:
+    1px solid rgba(183,89,89,.20);
+
+  border-radius: 10px;
+
+  background:
+    rgba(0,0,0,.10);
+
+  color: #a87777;
+
+  cursor: pointer;
+}
+
+/* ===============================
+   PLAYOFF
+================================ */
+
+.playoff-box {
+  display: none;
+
+  margin-top: 22px;
+
+  padding: 22px;
+
+  text-align: center;
+
+  border-radius: 15px;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(215,173,75,.13),
+      transparent 55%
+    ),
+    linear-gradient(
+      145deg,
+      #2b1539,
+      #0b070e
+    );
+
+  border:
+    1px solid rgba(215,173,75,.45);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.28);
+}
+
+.playoff-box.show {
+  display: block;
+}
+
+.playoff-title {
+  color:
+    var(--gold-light);
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 2.4px;
+}
+
+.playoff-position {
+  margin-top: 9px;
+
+  color: white;
+
+  font-size: 21px;
+
+  font-weight: 900;
+}
+
+.playoff-description {
+  margin:
+    8px 0 18px;
+
+  color:
+    var(--muted);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+.playoff-buttons {
+  display: grid;
+
+  gap: 9px;
+}
+
+.playoff-btn {
+  width: 100%;
+
+  padding: 14px;
+
+  border:
+    1px solid rgba(215,173,75,.42);
+
+  border-radius: 10px;
+
+  background:
+    rgba(215,173,75,.08);
+
+  color:
+    var(--gold-light);
+
+  font-size: 14px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+.playoff-btn:hover {
+  background:
+    rgba(215,173,75,.17);
+}
+
+/* ===============================
+   BOTTOM NAV
+================================ */
+
+nav {
+  position: fixed;
+
+  z-index: 100;
+
+  bottom: 0;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  width: 100%;
+  max-width: 520px;
+
+  height: 72px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  background:
+    rgba(5,4,7,.97);
+
+  border-top:
+    1px solid rgba(215,173,75,.14);
+
+  backdrop-filter:
+    blur(16px);
+
+  box-shadow:
+    0 -8px 30px rgba(0,0,0,.22);
+}
+
+nav button {
+  position: relative;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #716876;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+nav button.active {
+  color:
+    var(--gold-light);
+}
+
+nav button.active::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 27%;
+  right: 27%;
+
+  height: 2px;
+
+  background:
+    var(--gold);
+
+  border-radius:
+    0 0 4px 4px;
+}
+
+nav button:hover {
+  color: white;
+}
+
+/* ===============================
+   DESKTOP
+================================ */
+
+@media(min-width:700px) {
+
+  body {
+    padding: 25px 0;
+  }
+
+  .app {
+    min-height:
+      calc(100vh - 50px);
+
+    background:
+      rgba(6,4,8,.78);
+
+    border:
+      1px solid rgba(215,173,75,.11);
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+      0 30px 90px rgba(0,0,0,.60);
+  }
+
+  nav {
+    bottom: 25px;
+
+    border-radius:
+      0 0 22px 22px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+
+  <div class="logo">🏆</div>
+
+  <div class="season-title">2026-2027</div>
+
+    <h1>CASHIER&#39;S CUP</h1>
+
+  <p>DISC GOLF CHAMPIONSHIP</p>
+
+</header>
+
+
+<main>
+
+<!-- ======================
+HOME
+====================== -->
+
+<div
+  id="home"
+  class="page active"
+>
+
+<h2 class="section-title">
+Current Standings
+</h2>
+
+<div
+  id="homeStandings"
+  class="standings">
+</div>
+
+
+<div
+  id="mvpCard"
+  class="mvp-card">
+</div>
+
+
+<h2 class="section-title">
+Next Event
+</h2>
+
+<div id="nextEvent"></div>
+
+</div>
+
+
+<!-- ======================
+STANDINGS
+====================== -->
+
+<div
+  id="standings"
+  class="page"
+>
+
+<h2 class="section-title">
+Season Standings
+</h2>
+
+<div id="fullStandings"></div>
+
+</div>
+
+
+<!-- ======================
+SCHEDULE
+====================== -->
+
+<div
+  id="schedule"
+  class="page"
+>
+
+<h2 class="section-title">
+2026-2027 Schedule
+</h2>
+
+<div id="scheduleList"></div>
+
+</div>
+
+
+<!-- ======================
+SCORES
+====================== -->
+
+<div
+  id="scores"
+  class="page"
+>
+
+<h2 class="section-title">
+Enter Round Scores
+</h2>
+
+<div class="form-card">
+
+<div id="scoreEvent"></div>
+
+
+<label>
+Logan — Total Strokes
+</label>
+
+<input
+  id="scoreLogan"
+  type="number"
+  min="1"
+  placeholder="Enter total strokes"
+>
+
+
+<label>
+Noah — Total Strokes
+</label>
+
+<input
+  id="scoreNoah"
+  type="number"
+  min="1"
+  placeholder="Enter total strokes"
+>
+
+
+<label>
+Adam — Total Strokes
+</label>
+
+<input
+  id="scoreAdam"
+  type="number"
+  min="1"
+  placeholder="Enter total strokes"
+>
+
+
+<button
+  class="submit-btn"
+  onclick="submitScores()"
+>
+COMPLETE ROUND
+</button>
+
+
+<div
+  id="scoreNotice"
+  class="notice">
+</div>
+
+
+<!-- PLAYOFF AREA -->
+
+<div
+  id="playoffBox"
+  class="playoff-box"
+>
+
+<div class="playoff-title">
+PLAYOFF REQUIRED
+</div>
+
+<div
+  id="playoffPosition"
+  class="playoff-position">
+</div>
+
+<div
+  id="playoffDescription"
+  class="playoff-description">
+</div>
+
+<div
+  id="playoffButtons"
+  class="playoff-buttons">
+</div>
+
+</div>
+
+
+<button
+  class="reset-btn"
+  onclick="resetSeason()"
+>
+Reset Entire Season
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+
+<nav>
+
+<button
+  class="active"
+  onclick="showPage('home',this)"
+>
+HOME
+</button>
+
+<button
+  onclick="showPage('standings',this)"
+>
+STANDINGS
+</button>
+
+<button
+  onclick="showPage('schedule',this)"
+>
+SCHEDULE
+</button>
+
+<button
+  onclick="showPage('scores',this)"
+>
+SCORES
+</button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/* =========================================
+CASHIERS CUP
+========================================= */
+
+const defaultPlayers = [
+
+{
+  name: "Logan",
+  points: 0,
+  wins: 0,
+  rounds: 0,
+  roundsData: []
+},
+
+{
+  name: "Noah",
+  points: 0,
+  wins: 0,
+  rounds: 0,
+  roundsData: []
+},
+
+{
+  name: "Adam",
+  points: 0,
+  wins: 0,
+  rounds: 0,
+  roundsData: []
+}
+
+];
+
+
+/* =========================================
+POINT SYSTEM
+========================================= */
+
+const tierPoints = {
+
+C: [3,2,1],
+
+B: [6,4,2],
+
+A: [9,6,3]
+
+};
+
+
+/* =========================================
+18 ROUND SCHEDULE
+========================================= */
+
+const defaultEvents = [
+
+{
+round:1,
+course:"Springwood Park",
+layout:"Players' Course",
+tier:"C",
+par:54,
+completed:false
+},
+
+{
+round:2,
+course:"Buckhorn",
+layout:"White Layout",
+tier:"B",
+par:59,
+completed:false
+},
+
+{
+round:3,
+course:"Cedarock Park",
+layout:"Hard Layout",
+tier:"B",
+par:58,
+completed:false
+},
+
+{
+round:4,
+course:"Wellspring",
+layout:"White Layout",
+tier:"C",
+par:54,
+completed:false
+},
+
+{
+round:5,
+course:"Cedar Hills",
+layout:"Long-to-Long",
+tier:"A",
+par:58,
+completed:false
+},
+
+{
+round:6,
+course:"Deep Creek Dreams",
+layout:"Dreams",
+tier:"B",
+par:65,
+completed:false
+},
+
+{
+round:7,
+course:"Cedarock Park",
+layout:"White / Short Pins",
+tier:"C",
+par:58,
+completed:false
+},
+
+{
+round:8,
+course:"Chimney Hills",
+layout:"Blue",
+tier:"A",
+par:67,
+completed:false
+},
+
+{
+round:9,
+course:"The Regulator",
+layout:"White Tees",
+tier:"B",
+par:69,
+completed:false
+},
+
+{
+round:10,
+course:"Rockness Monster",
+layout:"White",
+tier:"C",
+par:54,
+completed:false
+},
+
+{
+round:11,
+course:"Patriot DGC",
+layout:"Blue",
+tier:"B",
+par:54,
+completed:false
+},
+
+{
+round:12,
+course:"Deep Creek",
+layout:"Nightmares",
+tier:"A",
+par:74,
+completed:false
+},
+
+{
+round:13,
+course:"Johnson Street",
+layout:"White",
+tier:"C",
+par:54,
+completed:false
+},
+
+{
+round:14,
+course:"Chimney Hills",
+layout:"Red",
+tier:"B",
+par:65,
+completed:false
+},
+
+{
+round:15,
+course:"Diavolo",
+layout:"Blue",
+tier:"A",
+par:77,
+completed:false
+},
+
+{
+round:16,
+course:"Rockness Monster",
+layout:"Blue",
+tier:"B",
+par:54,
+completed:false
+},
+
+{
+round:17,
+course:"Patriot DGC",
+layout:"Red",
+tier:"C",
+par:54,
+completed:false
+},
+
+{
+round:18,
+course:"The Regulator",
+layout:"Blue",
+tier:"A",
+par:69,
+completed:false
+}
+
+];
+
+
+/* =========================================
+STORAGE
+
+V2 keys intentionally prevent the old
+average bug from carrying into this version.
+========================================= */
+
+let players =
+JSON.parse(
+  localStorage.getItem(
+    "cashiersCupPlayersV2"
+  )
+)
+||
+JSON.parse(
+  JSON.stringify(defaultPlayers)
+);
+
+
+let events =
+JSON.parse(
+  localStorage.getItem(
+    "cashiersCupEventsV2"
+  )
+)
+||
+JSON.parse(
+  JSON.stringify(defaultEvents)
+);
+
+
+/* Temporary round waiting on playoff */
+
+let pendingRound = null;
+
+
+/* =========================================
+SAVE
+========================================= */
+
+function saveData() {
+
+localStorage.setItem(
+  "cashiersCupPlayersV2",
+  JSON.stringify(players)
+);
+
+localStorage.setItem(
+  "cashiersCupEventsV2",
+  JSON.stringify(events)
+);
+
+}
+
+
+/* =========================================
+AVERAGE RELATIVE TO PAR
+========================================= */
+
+function average(player) {
+
+if (
+  !player.roundsData ||
+  player.roundsData.length === 0
+) {
+  return null;
+}
+
+const totalDifferential =
+player.roundsData.reduce(
+  (total,round) =>
+    total + round.differential,
+  0
+);
+
+return (
+  totalDifferential /
+  player.roundsData.length
+);
+
+}
+
+
+/* =========================================
+FORMAT +/-
+========================================= */
+
+function formatAverage(number) {
+
+if (number === null) {
+  return "---";
+}
+
+if (number > 0) {
+  return "+" + number.toFixed(1);
+}
+
+if (number === 0) {
+  return "E";
+}
+
+return number.toFixed(1);
+
+}
+
+
+/* =========================================
+SORT STANDINGS
+========================================= */
+
+function sortedPlayers() {
+
+return [...players].sort(
+  (a,b) => {
+
+    if (b.points !== a.points) {
+      return b.points - a.points;
+    }
+
+    return b.wins - a.wins;
+
+  }
+);
+
+}
+
+
+/* =========================================
+NEXT EVENT
+========================================= */
+
+function nextEvent() {
+
+return events.find(
+  event => !event.completed
+);
+
+}
+
+
+/* =========================================
+HOME
+========================================= */
+
+function renderHome() {
+
+const sorted =
+sortedPlayers();
+
+const medals =
+["🥇","🥈","🥉"];
+
+
+document.getElementById(
+  "homeStandings"
+).innerHTML =
+
+sorted.map(
+  (player,index) => `
+
+<div class="
+player-card
+${index === 0 ? "first" : ""}
+">
+
+<div class="player-left">
+
+<span class="position">
+${medals[index]}
+</span>
+
+<span class="player-name">
+${player.name}
+</span>
+
+</div>
+
+<div class="player-points">
+${player.points} PTS
+</div>
+
+</div>
+
+`
+).join("");
+
+
+/* MVP */
+
+const playersWithRounds =
+players.filter(
+  player =>
+    player.roundsData &&
+    player.roundsData.length > 0
+);
+
+
+let mvp = null;
+
+
+if (playersWithRounds.length > 0) {
+
+mvp =
+[...playersWithRounds]
+.sort(
+  (a,b) =>
+    average(a) -
+    average(b)
+)[0];
+
+}
+
+
+document.getElementById(
+  "mvpCard"
+).innerHTML = `
+
+<div class="mvp-label">
+SEASON MVP
+</div>
+
+<div class="mvp-name">
+
+${mvp
+  ? mvp.name
+  : "---"
+}
+
+</div>
+
+<div class="mvp-average">
+
+Average
+
+<strong>
+
+${mvp
+  ? formatAverage(
+      average(mvp)
+    )
+  : "---"
+}
+
+</strong>
+
+vs Par
+
+</div>
+
+<div class="mvp-rounds">
+
+${mvp
+  ? mvp.rounds +
+    " ROUND" +
+    (mvp.rounds === 1 ? "" : "S") +
+    " PLAYED"
+  : "NO ROUNDS COMPLETED"
+}
+
+</div>
+
+`;
+
+
+/* NEXT EVENT */
+
+const event =
+nextEvent();
+
+
+if (!event) {
+
+document.getElementById(
+  "nextEvent"
+).innerHTML = `
+
+<div class="event-card">
+
+<div class="event-name">
+Season Complete
+</div>
+
+<div class="event-layout">
+Cashiers Cup Finished
+</div>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+const points =
+tierPoints[event.tier];
+
+
+document.getElementById(
+  "nextEvent"
+).innerHTML = `
+
+<div class="event-card">
+
+<div class="event-round">
+
+ROUND
+${event.round}
+OF
+${events.length}
+
+</div>
+
+<div class="event-name">
+
+${event.course}
+
+</div>
+
+<div class="event-layout">
+
+${event.layout}
+•
+Par ${event.par}
+
+</div>
+
+<div class="
+tier
+tier-${event.tier}
+">
+
+${event.tier} TIER
+
+</div>
+
+<div class="event-points">
+
+<div>
+
+<span>1ST</span>
+
+<strong>
+${points[0]}
+</strong>
+
+<span>PTS</span>
+
+</div>
+
+
+<div>
+
+<span>2ND</span>
+
+<strong>
+${points[1]}
+</strong>
+
+<span>PTS</span>
+
+</div>
+
+
+<div>
+
+<span>3RD</span>
+
+<strong>
+${points[2]}
+</strong>
+
+<span>PTS</span>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================
+STANDINGS PAGE
+========================================= */
+
+function renderStandings() {
+
+const sorted =
+sortedPlayers();
+
+
+document.getElementById(
+  "fullStandings"
+).innerHTML =
+
+sorted.map(
+  (player,index) => `
+
+<div class="stats-card">
+
+<div class="stats-top">
+
+<span class="stats-name">
+
+${index + 1}.
+${player.name}
+
+</span>
+
+<span class="stats-points">
+
+${player.points}
+PTS
+
+</span>
+
+</div>
+
+
+<div class="stats-grid">
+
+<div>
+
+<span class="stat-value">
+
+${player.wins}
+
+</span>
+
+<span class="stat-label">
+Wins
+</span>
+
+</div>
+
+
+<div>
+
+<span class="stat-value">
+
+${player.rounds}
+
+</span>
+
+<span class="stat-label">
+Rounds
+</span>
+
+</div>
+
+
+<div>
+
+<span class="stat-value">
+
+${formatAverage(
+  average(player)
+)}
+
+</span>
+
+<span class="stat-label">
+Avg +/-
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+`
+).join("");
+
+}
+
+
+/* =========================================
+SCHEDULE
+========================================= */
+
+function renderSchedule() {
+
+document.getElementById(
+  "scheduleList"
+).innerHTML =
+
+events.map(
+  event => `
+
+<div class="
+schedule-event
+${event.completed
+  ? "completed"
+  : ""
+}
+">
+
+<div class="schedule-top">
+
+<span class="schedule-round">
+
+ROUND
+${event.round}
+
+</span>
+
+<span class="
+tier
+tier-${event.tier}
+">
+
+${event.tier}
+
+</span>
+
+</div>
+
+
+<div class="schedule-course">
+
+${event.course}
+
+</div>
+
+
+<div class="schedule-layout">
+
+${event.layout}
+•
+Par ${event.par}
+
+${event.completed
+  ? " • COMPLETED"
+  : ""
+}
+
+</div>
+
+</div>
+
+`
+).join("");
+
+}
+
+
+/* =========================================
+SCORE ENTRY
+========================================= */
+
+function renderScoreEntry() {
+
+const event =
+nextEvent();
+
+const area =
+document.getElementById(
+  "scoreEvent"
+);
+
+
+if (!event) {
+
+area.innerHTML =
+"<strong>Season Complete</strong>";
+
+return;
+
+}
+
+
+area.innerHTML = `
+
+<strong>
+
+Round
+${event.round}:
+${event.course}
+
+</strong>
+
+<div style="
+color:#859188;
+margin-top:5px;
+font-size:12px;
+">
+
+${event.layout}
+•
+Par ${event.par}
+•
+${event.tier} Tier
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================
+SUBMIT REGULATION SCORES
+========================================= */
+
+function submitScores() {
+
+const event =
+nextEvent();
+
+
+if (!event) {
+  return;
+}
+
+
+const logan =
+document.getElementById(
+  "scoreLogan"
+).value;
+
+const noah =
+document.getElementById(
+  "scoreNoah"
+).value;
+
+const adam =
+document.getElementById(
+  "scoreAdam"
+).value;
+
+
+/* Validate */
+
+if (
+  logan === "" ||
+  noah === "" ||
+  adam === ""
+) {
+
+document.getElementById(
+  "scoreNotice"
+).textContent =
+"Enter all three scores.";
+
+return;
+
+}
+
+
+const results = [
+
+{
+name:"Logan",
+score:Number(logan)
+},
+
+{
+name:"Noah",
+score:Number(noah)
+},
+
+{
+name:"Adam",
+score:Number(adam)
+}
+
+];
+
+
+if (
+  results.some(
+    result =>
+      !Number.isFinite(result.score) ||
+      result.score <= 0
+  )
+) {
+
+document.getElementById(
+  "scoreNotice"
+).textContent =
+"Enter valid scores.";
+
+return;
+
+}
+
+
+/* Lowest strokes first */
+
+results.sort(
+  (a,b) =>
+    a.score -
+    b.score
+);
+
+
+/* Check ties */
+
+const tieGroups =
+findTieGroups(results);
+
+
+if (
+  tieGroups.length > 0
+) {
+
+pendingRound = {
+
+eventRound:
+event.round,
+
+eventPar:
+event.par,
+
+tier:
+event.tier,
+
+results:
+results,
+
+tieGroups:
+tieGroups,
+
+resolvedGroups: []
+
+};
+
+
+document.getElementById(
+  "scoreNotice"
+).textContent =
+"Regulation scores entered. Playoff required.";
+
+
+showNextPlayoff();
+
+return;
+
+}
+
+
+/* No tie */
+
+finalizeRound(
+  results
+);
+
+}
+
+
+/* =========================================
+FIND TIES
+========================================= */
+
+function findTieGroups(results) {
+
+const groups = [];
+
+let index = 0;
+
+
+while (
+  index < results.length
+) {
+
+const sameScore =
+results.filter(
+  result =>
+    result.score ===
+    results[index].score
+);
+
+
+if (
+  sameScore.length > 1
+) {
+
+const alreadyAdded =
+groups.some(
+  group =>
+    group.score ===
+    results[index].score
+);
+
+
+if (!alreadyAdded) {
+
+groups.push({
+
+score:
+results[index].score,
+
+players:
+sameScore.map(
+  player => player.name
+)
+
+});
+
+}
+
+}
+
+index++;
+
+}
+
+
+return groups;
+
+}
+
+
+/* =========================================
+SHOW PLAYOFF
+========================================= */
+
+function showNextPlayoff() {
+
+if (!pendingRound) {
+  return;
+}
+
+
+const unresolved =
+pendingRound.tieGroups.find(
+
+group =>
+
+!pendingRound.resolvedGroups.some(
+  resolved =>
+    resolved.score ===
+    group.score
+)
+
+);
+
+
+if (!unresolved) {
+
+finishPlayoffRound();
+
+return;
+
+}
+
+
+const box =
+document.getElementById(
+  "playoffBox"
+);
+
+
+box.classList.add(
+  "show"
+);
+
+
+const sorted =
+pendingRound.results;
+
+
+const firstIndex =
+sorted.findIndex(
+  result =>
+    result.score ===
+    unresolved.score
+);
+
+
+const place =
+firstIndex + 1;
+
+
+let positionText;
+
+
+if (
+  unresolved.players.length === 3
+) {
+
+positionText =
+"Three-Way Playoff";
+
+}
+else {
+
+positionText =
+"Playoff for " +
+ordinal(place);
+
+}
+
+
+document.getElementById(
+  "playoffPosition"
+).textContent =
+positionText;
+
+
+document.getElementById(
+  "playoffDescription"
+).textContent =
+
+unresolved.players.join(" and ") +
+" finished regulation with " +
+unresolved.score +
+" strokes. Select the playoff winner.";
+
+
+document.getElementById(
+  "playoffButtons"
+).innerHTML =
+
+unresolved.players.map(
+  name => `
+
+<button
+class="playoff-btn"
+onclick="selectPlayoffWinner('${name}')"
+>
+
+${name}
+WON PLAYOFF
+
+</button>
+
+`
+).join("");
+
+}
+
+
+/* =========================================
+SELECT PLAYOFF WINNER
+========================================= */
+
+function selectPlayoffWinner(
+  winnerName
+) {
+
+if (!pendingRound) {
+  return;
+}
+
+
+const unresolved =
+pendingRound.tieGroups.find(
+
+group =>
+
+!pendingRound.resolvedGroups.some(
+  resolved =>
+    resolved.score ===
+    group.score
+)
+
+);
+
+
+if (!unresolved) {
+  return;
+}
+
+
+const remaining =
+unresolved.players.filter(
+  name =>
+    name !== winnerName
+);
+
+
+let order =
+[winnerName];
+
+
+/*
+If only two people were tied,
+winner automatically finishes ahead.
+*/
+
+if (
+  unresolved.players.length === 2
+) {
+
+order.push(
+  remaining[0]
+);
+
+}
+
+
+/*
+If all 3 players tied,
+the first playoff winner gets first.
+
+We still need a playoff for 2nd
+between the remaining two.
+*/
+
+if (
+  unresolved.players.length === 3
+) {
+
+pendingRound.resolvedGroups.push({
+
+score:
+unresolved.score,
+
+order:
+[winnerName],
+
+remaining:
+remaining,
+
+threeWay:
+true
+
+});
+
+
+showSecondPlacePlayoff(
+  unresolved.score,
+  remaining
+);
+
+return;
+
+}
+
+
+pendingRound.resolvedGroups.push({
+
+score:
+unresolved.score,
+
+order:
+order
+
+});
+
+
+showNextPlayoff();
+
+}
+
+
+/* =========================================
+THREE-WAY TIE:
+PLAYOFF FOR SECOND
+========================================= */
+
+function showSecondPlacePlayoff(
+  score,
+  playersLeft
+) {
+
+const box =
+document.getElementById(
+  "playoffBox"
+);
+
+
+box.classList.add(
+  "show"
+);
+
+
+document.getElementById(
+  "playoffPosition"
+).textContent =
+"Playoff for 2nd";
+
+
+document.getElementById(
+  "playoffDescription"
+).textContent =
+
+playersLeft.join(" and ") +
+" continue the playoff for second place.";
+
+
+document.getElementById(
+  "playoffButtons"
+).innerHTML =
+
+playersLeft.map(
+  name => `
+
+<button
+class="playoff-btn"
+onclick="
+selectSecondPlaceWinner(
+'${name}',
+${score}
+)
+"
+>
+
+${name}
+WON PLAYOFF
+
+</button>
+
+`
+).join("");
+
+}
+
+
+/* =========================================
+SELECT SECOND IN THREE-WAY TIE
+========================================= */
+
+function selectSecondPlaceWinner(
+  winnerName,
+  score
+) {
+
+const group =
+pendingRound.resolvedGroups.find(
+
+group =>
+  group.score === score &&
+  group.threeWay
+
+);
+
+
+if (!group) {
+  return;
+}
+
+
+const loser =
+group.remaining.find(
+  name =>
+    name !== winnerName
+);
+
+
+group.order.push(
+  winnerName
+);
+
+group.order.push(
+  loser
+);
+
+group.threeWay =
+false;
+
+delete group.remaining;
+
+
+showNextPlayoff();
+
+}
+
+
+/* =========================================
+FINISH PLAYOFF ROUND
+========================================= */
+
+function finishPlayoffRound() {
+
+let finalResults =
+[...pendingRound.results];
+
+
+pendingRound.resolvedGroups.forEach(
+  resolved => {
+
+const tiedIndexes = [];
+
+
+finalResults.forEach(
+  (result,index) => {
+
+if (
+  result.score ===
+  resolved.score
+) {
+
+tiedIndexes.push(index);
+
+}
+
+});
+
+
+resolved.order.forEach(
+  (name,index) => {
+
+const playerResult =
+finalResults.find(
+  result =>
+    result.name === name
+);
+
+
+finalResults[
+  tiedIndexes[index]
+] = playerResult;
+
+});
+
+});
+
+
+document.getElementById(
+  "playoffBox"
+).classList.remove(
+  "show"
+);
+
+
+finalizeRound(
+  finalResults
+);
+
+
+pendingRound = null;
+
+}
+
+
+/* =========================================
+FINALIZE ROUND
+========================================= */
+
+function finalizeRound(
+  finalResults
+) {
+
+const event =
+nextEvent();
+
+
+if (!event) {
+  return;
+}
+
+
+const points =
+tierPoints[event.tier];
+
+
+/*
+Store regulation score and
+score relative to par.
+
+Playoff strokes are NOT included.
+*/
+
+finalResults.forEach(
+  (result,index) => {
+
+const player =
+players.find(
+  player =>
+    player.name ===
+    result.name
+);
+
+
+const differential =
+result.score -
+event.par;
+
+
+player.points +=
+points[index];
+
+
+player.rounds += 1;
+
+
+player.roundsData.push({
+
+round:
+event.round,
+
+course:
+event.course,
+
+score:
+result.score,
+
+par:
+event.par,
+
+differential:
+differential
+
+});
+
+});
+
+
+/* Winner */
+
+const winner =
+players.find(
+  player =>
+    player.name ===
+    finalResults[0].name
+);
+
+
+winner.wins += 1;
+
+
+/* Save event results */
+
+event.completed =
+true;
+
+
+event.results =
+finalResults.map(
+  (result,index) => ({
+
+name:
+result.name,
+
+score:
+result.score,
+
+differential:
+result.score -
+event.par,
+
+place:
+index + 1,
+
+points:
+points[index]
+
+})
+);
+
+
+saveData();
+
+
+/* Clear inputs */
+
+document.getElementById(
+  "scoreLogan"
+).value = "";
+
+document.getElementById(
+  "scoreNoah"
+).value = "";
+
+document.getElementById(
+  "scoreAdam"
+).value = "";
+
+
+/* Confirmation */
+
+document.getElementById(
+  "scoreNotice"
+).textContent =
+
+finalResults[0].name +
+" wins Round " +
+event.round +
+"!";
+
+
+renderAll();
+
+}
+
+
+/* =========================================
+ORDINAL
+========================================= */
+
+function ordinal(number) {
+
+if (number === 1) {
+  return "1st";
+}
+
+if (number === 2) {
+  return "2nd";
+}
+
+return "3rd";
+
+}
+
+
+/* =========================================
+NAVIGATION
+========================================= */
+
+function showPage(
+  page,
+  button
+) {
+
+document
+.querySelectorAll(
+  ".page"
+)
+.forEach(
+  pageElement =>
+    pageElement
+    .classList
+    .remove("active")
+);
+
+
+document
+.getElementById(page)
+.classList
+.add("active");
+
+
+document
+.querySelectorAll(
+  "nav button"
+)
+.forEach(
+  navButton =>
+    navButton
+    .classList
+    .remove("active")
+);
+
+
+button
+.classList
+.add("active");
+
+}
+
+
+/* =========================================
+RESET SEASON
+========================================= */
+
+function resetSeason() {
+
+const confirmed =
+confirm(
+  "Reset the entire Cashiers Cup season? All scores and standings will be deleted."
+);
+
+
+if (!confirmed) {
+  return;
+}
+
+
+localStorage.removeItem(
+  "cashiersCupPlayersV2"
+);
+
+localStorage.removeItem(
+  "cashiersCupEventsV2"
+);
+
+
+players =
+JSON.parse(
+  JSON.stringify(
+    defaultPlayers
+  )
+);
+
+
+events =
+JSON.parse(
+  JSON.stringify(
+    defaultEvents
+  )
+);
+
+
+pendingRound =
+null;
+
+
+document.getElementById(
+  "playoffBox"
+).classList.remove(
+  "show"
+);
+
+
+document.getElementById(
+  "scoreNotice"
+).textContent =
+"Season reset.";
+
+
+renderAll();
+
+}
+
+
+/* =========================================
+RENDER
+========================================= */
+
+function renderAll() {
+
+renderHome();
+
+renderStandings();
+
+renderSchedule();
+
+renderScoreEntry();
+
+}
+
+
+renderAll();
+
+</script>
+
+</body>
+</html>
